@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 
 
 class PostModel(models.Model):
-    author = models.ForeignKey('auth.User')
+    author = models.ForeignKey('auth.User', on_delete = models.CASCADE)
     title = models.CharField(max_length = 200)
     text = models.TextField()
     create_date = models.DateTimeField(timezone.now())
