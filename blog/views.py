@@ -4,10 +4,11 @@ from . import models
 from . import forms
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.utils import timezone
 
 
 class AboutView(TemplateView):
-    template_name = 'about.html'
+    template_name = 'about_page.html'
 
 
 class PostListView(ListView):
