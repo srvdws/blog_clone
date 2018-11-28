@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.shortcuts import redirect
 
 
-class Post(models.Model):
+class PostModel(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length = 200)
     text = models.TextField()
@@ -25,8 +25,8 @@ class Post(models.Model):
         return self.title
 
 
-class Comment(models.Model):
-    post = models.ForeignKey('blog.Post', related_name = 'comments', on_delete = models.CASCADE)
+class CommentModel(models.Model):
+    post = models.ForeignKey('blog.PostModel', related_name = 'comments', on_delete = models.CASCADE)
     author = models.CharField(max_length = 200)
     text = models.TextField()
     create_date = models.DateTimeField(timezone.now())
