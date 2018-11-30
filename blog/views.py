@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from . import models
 from . import forms
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.utils import timezone
+
 
 
 class AboutView(TemplateView):
@@ -48,5 +50,14 @@ class DraftListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return models.PostModel.objects.filter(published_date__isn = True).order_by('created_date')
+
+
+############################
+##    COMMENTS VIEWS      ##
+############################
+
+@login_required
+def add_comment_to_post(request, pk):
+    post = get_object_or_404(models.PostModel, pk = pk)
 
 
