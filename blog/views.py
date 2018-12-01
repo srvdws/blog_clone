@@ -78,6 +78,28 @@ def comment_approve(request, pk):
     return redirect('post_detail', pk = comment.post.pk)
 
 
+@login_required
+def comment_remove(request, pk):
+    comment = get_object_or_404(Comment, pk = pk)
+    post_pk = comment.post.pk
+    comment.delete()
+    return redirect('post_detail', pk = post_pk)
+
+
+@login_required
+def post_publish(request, pk):
+    post = get_object_or_404(models.PostModel, pk = pk)
+    post.publish()
+    return redirect('post_detail', pk = pk)
+
+
+
+
+
+
+
+
+
 
 
 
