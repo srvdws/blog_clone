@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class = "jumbotron">
-    <h2>Please logint:</h2>
+    <h2>Please login:</h2>
     <h3>(must be a superuser)</h3>
 
     {% if form.errors %}
@@ -11,9 +11,9 @@
     {% endif %}
 
     <form method="post" action = "{% url 'login' %}">
-       {% csrf_token %}
-            {% form.as_p %}
-        <input type="submit" class="btn bt-primary" value = "LOGIN">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn" value = "LOGIN">
         <input type="hidden" name = "next" value = "{{next}}">
     </form>
 

@@ -25,21 +25,21 @@ class PostDetailView(DetailView):
 
 class CreatePostView(LoginRequiredMixin, CreateView):
     login_url = '/login/'
-    redirect_field_name = 'blog/post_detail.html'  # should this not be a view? or url?
+    redirect_field_name = 'blog/postmodel_detail.html'  # should this not be a view? or url?
     form_class = forms.PostForm
     model = models.PostModel
 
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     login_url = '/login/'
-    redirect_field_name = 'blog/post_detail.html'  # should this not be a view? or url?
+    redirect_field_name = 'blog/postmodel_detail.html'  # should this not be a view? or url?
     form_class = forms.PostForm
     model = models.PostModel
 
 
 class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = models.PostModel
-    success_url = reverse_lazy('post_list')
+    success_url = reverse_lazy('postmodel_list')
 
 
 class DraftListView(LoginRequiredMixin, ListView):
