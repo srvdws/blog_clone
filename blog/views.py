@@ -8,7 +8,6 @@ from django.urls import reverse_lazy
 from django.utils import timezone
 
 
-
 class AboutView(TemplateView):
     template_name = 'about_page.html'
 
@@ -53,11 +52,35 @@ class DraftListView(LoginRequiredMixin, ListView):
 
 
 ############################
-##    COMMENTS VIEWS      ##
+#     COMMENTS VIEWS       #
 ############################
 
 @login_required
 def add_comment_to_post(request, pk):
     post = get_object_or_404(models.PostModel, pk = pk)
+
+    if request == 'POST':
+        form = forms.CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit = False)
+            comment.post = post
+            comment.save()
+            return redirect('post_detail', pk = post.pk)
+    else:
+        form = forms.CommentForm()
+    return render(request, 'blog/comment_form.html', {'form': form})
+
+
+@login_required
+def comment_approve(request, pk):
+    comment = get_object_or_404(models.CommentModel, pk = pk)
+    comment.approve()
+    return redirect('post_detail', pk = comment.post.pk)
+
+
+
+
+
+
 
 
